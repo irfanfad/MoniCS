@@ -1,33 +1,18 @@
 package com.example.mymonics;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.example.mymonics.adapter.PagerAdapter;
-import com.example.mymonics.api.APIClient;
-import com.example.mymonics.api.APIInteface;
 import com.example.mymonics.fragment.NewFragment;
 import com.example.mymonics.fragment.PastFragment;
 import com.example.mymonics.fragment.ProgressFragment;
-import com.example.mymonics.model.Misi;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MissionActivity extends AppCompatActivity {
 
@@ -50,8 +35,6 @@ public class MissionActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

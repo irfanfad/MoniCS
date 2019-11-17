@@ -21,6 +21,17 @@ public class Misi {
     @Expose
     private String lokasi;
 
+    @SerializedName("point")
+    @Expose
+    private String point;
+
+    public String getPoint() {
+        return point;
+    }
+
+    public void setPoint(String point) {
+        this.point = point;
+    }
     public String getIdMisi() {
         return idMisi;
     }

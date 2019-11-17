@@ -2,21 +2,22 @@ package com.example.mymonics.fragment;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymonics.R;
+import com.example.mymonics.adapter.MissionAdapter;
 import com.example.mymonics.api.APIClient;
 import com.example.mymonics.api.APIInteface;
 import com.example.mymonics.model.Misi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,6 +29,10 @@ import retrofit2.Response;
  */
 public class NewFragment extends Fragment {
 
+    private RecyclerView rvMission;
+    private ArrayList<Misi> list;
+    MissionAdapter missionAdapter;
+    View view;
 
     public NewFragment() {
         // Required empty public constructor
@@ -37,12 +42,26 @@ public class NewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        view = inflater.inflate(R.layout.fragment_new, container, false);
+        rvMission = (RecyclerView) view.findViewById(R.id.recycler_view);
+        rvMission.setHasFixedSize(true);
+
+        list = new ArrayList<>();
         getMission();
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new, container, false);
+
+        showRecyclerCardView();
+
+        return  view;
     }
 
-    public void getMission(){
+    private void showRecyclerCardView() {
+        rvMission.setLayoutManager(new LinearLayoutManager(getContext()));
+        missionAdapter = new MissionAdapter(list);
+        rvMission.setAdapter(missionAdapter);
+    }
+
+    public void getMission() {
         APIInteface apiInteface = APIClient.getApiClient().create(APIInteface.class);
 
         Call<List<Misi>> call = apiInteface.getMisi();
@@ -50,6 +69,8 @@ public class NewFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Misi>> call, Response<List<Misi>> response) {
                 Log.d("masuk", String.valueOf(response.body()));
+                list.addAll(response.body());
+                rvMission.setAdapter(missionAdapter);
             }
 
             @Override
