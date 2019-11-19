@@ -1,35 +1,38 @@
 package com.example.mymonics;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.example.mymonics.api.APIClient;
-import com.example.mymonics.api.APIInteface;
-import com.example.mymonics.model.Misi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import static com.example.mymonics.SessionManager.NAMA;
+import static com.example.mymonics.SessionManager.POINT;
+import static com.example.mymonics.SessionManager.PREF_NAME;
+import static com.example.mymonics.SessionManager.PRIVATE_MODE;
 
 public class CleaningServiceActivity extends AppCompatActivity implements View.OnClickListener {
     SessionManager sessionManager;
 
     private CardView cvMisi,cvLeaderboard,cvReward,cvLogout;
+    private TextView tvNama, tvPoint;
+    String point,nama;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences2;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cleaning_service);
+
+        tvNama = findViewById(R.id.tv_nama);
+        tvPoint = findViewById(R.id.tv_point);
 
         cvMisi = findViewById(R.id.cv_misi);
         cvLeaderboard = findViewById(R.id.cv_leaderboard);
@@ -45,6 +48,15 @@ public class CleaningServiceActivity extends AppCompatActivity implements View.O
         sessionManager = new SessionManager(this);
 
         sessionManager.checkLogin();
+
+        sharedPreferences = getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        sharedPreferences2 = getSharedPreferences("DATE", PRIVATE_MODE);
+        point = sharedPreferences.getString(POINT, "");
+        nama = sharedPreferences.getString(NAMA, "");
+        Log.d("point", point);
+
+        tvNama.setText(nama);
+        tvPoint.setText(point);
     }
 
     @Override
@@ -55,13 +67,16 @@ public class CleaningServiceActivity extends AppCompatActivity implements View.O
                 startActivity(intent);
                 break;
             case R.id.cv_leaderboard:
-                //
+                intent = new Intent(CleaningServiceActivity.this, LeaderboardActivity.class);
+                startActivity(intent);
                 break;
             case R.id.cv_reward:
-                //
+                intent = new Intent(CleaningServiceActivity.this, RewardActivity.class);
+                startActivity(intent);
                 break;
             case R.id.cv_logout:
                 sessionManager.logout();
+                sharedPreferences2.edit().remove("DATENOW").apply();
                 break;
         }
 

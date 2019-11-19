@@ -1,7 +1,5 @@
 package com.example.mymonics;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mymonics.api.APIClient;
 import com.example.mymonics.api.APIInteface;
@@ -86,11 +86,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(LoginActivity.this, user.getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         if (user.getJabatan().equalsIgnoreCase("Manager")) {
-                            sessionManager.createSession(user.getJabatan());
+                            sessionManager.createSession(user.getJabatan(), user.getNik(), user.getNama(),user.getPoint());
                             Intent intent = new Intent(LoginActivity.this, ManagerActivity.class);
                             startActivity(intent);
                         } else {
-                            sessionManager.createSession(user.getJabatan());
+                            sessionManager.createSession(user.getJabatan(),user.getNik(),user.getNama(),user.getPoint());
                             Intent intent = new Intent(LoginActivity.this, CleaningServiceActivity.class);
                             startActivity(intent);
                         }

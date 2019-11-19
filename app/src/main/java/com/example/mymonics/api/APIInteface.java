@@ -10,6 +10,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface APIInteface {
 
@@ -21,5 +22,5 @@ public interface APIInteface {
                         );
 
     @GET("getMisi")
-    Call<List<Misi>> getMisi();
+    Call<List<Misi>> getMisi(@Query("nik") String nik);
 }

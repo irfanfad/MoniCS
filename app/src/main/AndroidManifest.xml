@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ManagerActivity" ></activity>
-        <activity android:name=".CleaningServiceActivity" ></activity>
-        <activity android:name=".MissionActivity"></activity>
+        <activity android:name=".RewardActivity"></activity>
+        <activity android:name=".LeaderboardActivity" />
+        <activity android:name=".DetailMissionActivity" />
+        <activity android:name=".ManagerActivity" />
+        <activity android:name=".CleaningServiceActivity" />
+        <activity android:name=".MissionActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

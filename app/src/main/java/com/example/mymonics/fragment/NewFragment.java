@@ -1,6 +1,7 @@
 package com.example.mymonics.fragment;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.mymonics.SessionManager.NIK;
+import static com.example.mymonics.SessionManager.PREF_NAME;
+import static com.example.mymonics.SessionManager.PRIVATE_MODE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -33,6 +38,8 @@ public class NewFragment extends Fragment {
     private ArrayList<Misi> list;
     MissionAdapter missionAdapter;
     View view;
+    String nik;
+    SharedPreferences sharedPreferences;
 
     public NewFragment() {
         // Required empty public constructor
@@ -48,23 +55,28 @@ public class NewFragment extends Fragment {
         rvMission.setHasFixedSize(true);
 
         list = new ArrayList<>();
-        getMission();
+
 
         showRecyclerCardView();
+
+        sharedPreferences = getActivity().getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        nik = sharedPreferences.getString(NIK, "");
+        getMission();
+        Log.d("nik", nik);
 
         return  view;
     }
 
     private void showRecyclerCardView() {
         rvMission.setLayoutManager(new LinearLayoutManager(getContext()));
-        missionAdapter = new MissionAdapter(list);
+        missionAdapter = new MissionAdapter(list, getContext());
         rvMission.setAdapter(missionAdapter);
     }
 
     public void getMission() {
         APIInteface apiInteface = APIClient.getApiClient().create(APIInteface.class);
 
-        Call<List<Misi>> call = apiInteface.getMisi();
+        Call<List<Misi>> call = apiInteface.getMisi(nik);
         call.enqueue(new Callback<List<Misi>>() {
             @Override
             public void onResponse(Call<List<Misi>> call, Response<List<Misi>> response) {

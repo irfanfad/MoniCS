@@ -30,6 +30,17 @@ public class User {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("point")
+    @Expose
+    private String point;
+
+    public String getPoint() {
+        return point;
+    }
+
+    public void setPoint(String point) {
+        this.point = point;
+    }
 
     public String getMessage() {
         return message;

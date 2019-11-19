@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroud"
+    android:background="@drawable/background_light"
     tools:context=".CleaningServiceActivity">
 
     <LinearLayout
@@ -27,29 +27,93 @@
                 android:text="DASHBOARD"
                 android:textColor="#fff"
                 android:textSize="22sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/layout_hai"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_dashboard"
-                android:text="Point"
-                android:textColor="#fff"
-                android:textSize="16sp" />
+                android:orientation="horizontal"
+                android:layout_below="@id/tv_dashboard">
+                <TextView
+                    android:id="@+id/txt_hai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/img_chest"
+                    android:text="Hai,"
+                    android:paddingTop="20dp"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/txt_hai"
+                    android:text="Irfan Fadilah"
+                    android:paddingLeft="10dp"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <RelativeLayout
+                android:paddingTop="50dp"
+                android:id="@+id/detail_poin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_dashboard">
+
+                <ImageView
+                    android:id="@+id/img_chest"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_chest" />
+                <TextView
+                    android:id="@+id/txt_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/img_chest"
+                    android:text="Point"
+                    android:paddingLeft="10dp"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_toRightOf="@id/img_chest"
+                    android:layout_below="@+id/txt_point"
+                    android:paddingLeft="10dp"
+                    android:textStyle="bold"
+                    android:text="25640"
+                    android:textColor="@color/whiteTextColor"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_toRightOf="@id/tv_point"
+                    android:layout_below="@id/txt_point"
+                    android:paddingLeft="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/whiteTextColor"
+                    android:text="point"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_profile"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_facebook"
+                android:src="@drawable/ic_cleaningservice"
                 app:civ_border_width="2dp"
-                app:civ_border_color="#000"
+                android:paddingRight="20dp"
+                app:civ_border_color="#FFF"
                 />
         </RelativeLayout>
 
         <GridLayout
             android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alignmentMode="alignMargins"
