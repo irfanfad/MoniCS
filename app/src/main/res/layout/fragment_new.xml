@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/recycler_view"
     android:paddingTop="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:scrollbars="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.NewFragment"
@@ -13,3 +17,18 @@
     <!-- TODO: Update blank fragment layout -->
 
 </androidx.recyclerview.widget.RecyclerView>
+    <Button
+        android:id="@+id/btn_lapor"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/button_background_blue"
+        android:text="Lapor"
+        android:textColor="@color/whiteTextColor"
+        android:textSize="10sp" />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/img_tes"/>
+</LinearLayout>

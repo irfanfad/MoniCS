@@ -1,12 +1,21 @@
 package com.example.mymonics.fragment;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,13 +27,18 @@ import com.example.mymonics.api.APIClient;
 import com.example.mymonics.api.APIInteface;
 import com.example.mymonics.model.Misi;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.mymonics.SessionManager.NIK;
 import static com.example.mymonics.SessionManager.PREF_NAME;
 import static com.example.mymonics.SessionManager.PRIVATE_MODE;
@@ -40,6 +54,12 @@ public class NewFragment extends Fragment {
     View view;
     String nik;
     SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences2;
+    SharedPreferences.Editor editor;
+    ImageView imgTes;
+    String date, date2;
+    Button btnLapor;
+    Date dateLapor;
 
     public NewFragment() {
         // Required empty public constructor
@@ -53,6 +73,9 @@ public class NewFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_new, container, false);
         rvMission = (RecyclerView) view.findViewById(R.id.recycler_view);
         rvMission.setHasFixedSize(true);
+        btnLapor = view.findViewById(R.id.btn_lapor);
+        btnLapor.setVisibility(View.INVISIBLE);
+
 
         list = new ArrayList<>();
 
@@ -61,10 +84,66 @@ public class NewFragment extends Fragment {
 
         sharedPreferences = getActivity().getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         nik = sharedPreferences.getString(NIK, "");
+
+        sharedPreferences2 = getActivity().getSharedPreferences("DATE", 0);
+        editor = sharedPreferences2.edit();
+        dateLapor = new Date();
+        date = sharedPreferences2.getString("DATENOW", "");
+        date2 = sharedPreferences2.getString("DATELAPOR", "");
+
         getMission();
         Log.d("nik", nik);
 
+//        ContentValues values = new ContentValues();
+//        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+//        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera");
+//        imageUri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+//        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+//        startActivityForResult(cameraIntent, 1001);
+
+        imgTes = view.findViewById(R.id.img_tes);
+
+        if (date.isEmpty()) {
+            btnLapor.setVisibility(View.INVISIBLE);
+        } else {
+            btnLapor.setVisibility(View.VISIBLE);
+            btnLapor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    btnLapor.setVisibility(View.INVISIBLE);
+                    openCamera();
+                }
+            });
+        }
+
         return  view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 100){
+            Bitmap bmp = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+
+            // convert byte array to Bitmap
+
+            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
+                    byteArray.length);
+
+            Log.d("tes", bitmap.toString());
+            imgTes.setImageBitmap(bitmap);
+
+            Uri tempUri = getImageUri(getActivity().getApplicationContext(), bitmap);
+
+            File finalFile = new File(getRealPathFromURI(tempUri));
+            Log.d("final", String.valueOf(finalFile));
+
+        }
     }
 
     private void showRecyclerCardView() {
@@ -92,5 +171,32 @@ public class NewFragment extends Fragment {
         });
     }
 
+    public String getDateNow(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return formatter.format(date);
+    }
 
+    public void openCamera(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,
+                100);
+        editor.putString("DATELAPOR", getDateNow(dateLapor));
+        editor.commit();
+        Log.d("datelapor", getDateNow(dateLapor));
+        sharedPreferences2.edit().remove("DATENOW").apply();
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
 }

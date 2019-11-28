@@ -105,18 +105,5 @@
             android:text="point"
             android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btn_lapor"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_below="@+id/tv_jam_selesai"
-            android:layout_marginLeft="100dp"
-            android:paddingLeft="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/tv_point"
-            android:background="@drawable/button_background_blue"
-            android:text="Lapor"
-            android:textColor="@color/whiteTextColor"
-            android:textSize="10sp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -1,9 +1,8 @@
 package com.example.mymonics;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ManagerActivity extends AppCompatActivity {
 

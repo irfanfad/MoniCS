@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroud"
+    android:background="@drawable/background_light"
     tools:context=".CleaningServiceActivity">
 
     <LinearLayout
@@ -74,7 +74,7 @@
             android:columnOrderPreserved="false"
             android:rowCount="5">
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_validasi"
+                android:id="@+id/cv_monitoring"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:textAlignment="center"
-                        android:text="Validasi Tugas"
+                        android:text="Monitoring Tugas"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:textAlignment="center"
-                        android:text="Mengelola Cleaning Service"
+                        android:text="Kelola Cleaning Service"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -163,7 +163,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:textAlignment="center"
-                        android:text="Mengelola Misi"
+                        android:text="Kelola Misi"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -194,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:textAlignment="center"
-                        android:text="Mengelola Reward"
+                        android:text="Kelola Reward"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

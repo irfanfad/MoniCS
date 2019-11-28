@@ -57,6 +57,7 @@ public class CleaningServiceActivity extends AppCompatActivity implements View.O
 
         tvNama.setText(nama);
         tvPoint.setText(point);
+
     }
 
     @Override
