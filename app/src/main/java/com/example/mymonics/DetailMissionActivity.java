@@ -64,7 +64,8 @@ public class DetailMissionActivity extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(DetailMissionActivity.this, MissionActivity.class);
+                startActivity(intent);
             }
         });
         if (date.isEmpty()) {

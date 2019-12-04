@@ -74,7 +74,7 @@
             android:columnOrderPreserved="false"
             android:rowCount="5">
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_monitoring"
+                android:id="@+id/cv_laporan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:textAlignment="center"
-                        android:text="Monitoring Tugas"
+                        android:text="Lihat Laporan"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

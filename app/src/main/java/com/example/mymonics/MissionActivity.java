@@ -1,6 +1,7 @@
 package com.example.mymonics;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,7 +50,8 @@ public class MissionActivity extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(MissionActivity.this, CleaningServiceActivity.class);
+                startActivity(intent);
             }
         });
 

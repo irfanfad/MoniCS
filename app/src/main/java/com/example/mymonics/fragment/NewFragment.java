@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -61,7 +60,6 @@ public class NewFragment extends Fragment {
     SharedPreferences sharedPreferences2;
     SharedPreferences sharedPreferences3;
     SharedPreferences.Editor editor;
-    ImageView imgTes;
     String date, date2, idmisi;
     Button btnLapor;
     Date dateLapor;
@@ -102,15 +100,6 @@ public class NewFragment extends Fragment {
         getMission();
         Log.d("nik", nik);
 
-//        ContentValues values = new ContentValues();
-//        values.put(MediaStore.Images.Media.TITLE, "New Picture");
-//        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera");
-//        imageUri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-//        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-//        startActivityForResult(cameraIntent, 1001);
-
-        imgTes = view.findViewById(R.id.img_tes);
 
         if (date.isEmpty()) {
             btnLapor.setVisibility(View.INVISIBLE);
@@ -145,11 +134,10 @@ public class NewFragment extends Fragment {
                     byteArray.length);
 
             Log.d("tes", bitmap.toString());
-            imgTes.setImageBitmap(bitmap);
 
             Uri tempUri = getImageUri(getActivity().getApplicationContext(), bitmap);
 
-            path = getRealPathFromURI(tempUri);
+            file = new File(getRealPathFromURI(tempUri));
             Log.d("final", String.valueOf(file));
             Log.d("misi", idmisi);
 
@@ -158,24 +146,19 @@ public class NewFragment extends Fragment {
     }
 
     private void kirimLaporan(){
-        File file = new File(path);
-//        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-//
-//        builder.addFormDataPart("waktu_mulai", date);
-//        builder.addFormDataPart("waktu_lapor", date2);
-//        builder.addFormDataPart("id_misi", idmisi);
-//        builder.addFormDataPart("nik", nik);
-        //builder.addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
-        //MultipartBody requestBody = builder.build();
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
-        MultipartBody.Part body =MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-
-        RequestBody ImageNumber = RequestBody.create(okhttp3.MultipartBody.FORM,"1");
+        builder.addFormDataPart("waktu_mulai", date);
+        builder.addFormDataPart("waktu_lapor", date2);
+        builder.addFormDataPart("id_misi", idmisi);
+        builder.addFormDataPart("nik", nik);
+        builder.addFormDataPart("status", "1");
+        builder.addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
+        MultipartBody requestBody = builder.build();
+        Log.d("body", file.getName());
 
         APIInteface apiInteface = APIClient.getApiClient().create(APIInteface.class);
-        Call<Laporan> call = apiInteface.lapor(ImageNumber, body);
+        Call<Laporan> call = apiInteface.lapor(requestBody);
         call.enqueue(new Callback<Laporan>() {
             @Override
             public void onResponse(Call<Laporan> call, Response<Laporan> response) {
@@ -230,16 +213,24 @@ public class NewFragment extends Fragment {
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, timeStamp, null);
         return Uri.parse(path);
     }
 
     public String getRealPathFromURI(Uri uri) {
-        Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx);
+        String path = "";
+        if (getActivity().getContentResolver() != null) {
+            Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                path = cursor.getString(idx);
+                cursor.close();
+            }
+        }
+        return path;
     }
 }
