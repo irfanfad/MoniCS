@@ -25,6 +25,7 @@ import com.example.mymonics.R;
 import com.example.mymonics.adapter.MissionAdapter;
 import com.example.mymonics.api.APIClient;
 import com.example.mymonics.api.APIInteface;
+import com.example.mymonics.model.Laporan;
 import com.example.mymonics.model.Misi;
 
 import java.io.ByteArrayOutputStream;
@@ -34,6 +35,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,11 +59,14 @@ public class NewFragment extends Fragment {
     String nik;
     SharedPreferences sharedPreferences;
     SharedPreferences sharedPreferences2;
+    SharedPreferences sharedPreferences3;
     SharedPreferences.Editor editor;
     ImageView imgTes;
-    String date, date2;
+    String date, date2, idmisi;
     Button btnLapor;
     Date dateLapor;
+    File file;
+    String path;
 
     public NewFragment() {
         // Required empty public constructor
@@ -86,6 +93,7 @@ public class NewFragment extends Fragment {
         nik = sharedPreferences.getString(NIK, "");
 
         sharedPreferences2 = getActivity().getSharedPreferences("DATE", 0);
+        sharedPreferences3 = getActivity().getSharedPreferences("IDMISI", 0);
         editor = sharedPreferences2.edit();
         dateLapor = new Date();
         date = sharedPreferences2.getString("DATENOW", "");
@@ -123,6 +131,7 @@ public class NewFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        idmisi = sharedPreferences3.getString("MISIID", "");
         if (resultCode == RESULT_OK && requestCode == 100){
             Bitmap bmp = (Bitmap) data.getExtras().get("data");
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -140,10 +149,44 @@ public class NewFragment extends Fragment {
 
             Uri tempUri = getImageUri(getActivity().getApplicationContext(), bitmap);
 
-            File finalFile = new File(getRealPathFromURI(tempUri));
-            Log.d("final", String.valueOf(finalFile));
+            path = getRealPathFromURI(tempUri);
+            Log.d("final", String.valueOf(file));
+            Log.d("misi", idmisi);
 
         }
+        kirimLaporan();
+    }
+
+    private void kirimLaporan(){
+        File file = new File(path);
+//        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+//
+//        builder.addFormDataPart("waktu_mulai", date);
+//        builder.addFormDataPart("waktu_lapor", date2);
+//        builder.addFormDataPart("id_misi", idmisi);
+//        builder.addFormDataPart("nik", nik);
+        //builder.addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
+        //MultipartBody requestBody = builder.build();
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        MultipartBody.Part body =MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        RequestBody ImageNumber = RequestBody.create(okhttp3.MultipartBody.FORM,"1");
+
+        APIInteface apiInteface = APIClient.getApiClient().create(APIInteface.class);
+        Call<Laporan> call = apiInteface.lapor(ImageNumber, body);
+        call.enqueue(new Callback<Laporan>() {
+            @Override
+            public void onResponse(Call<Laporan> call, Response<Laporan> response) {
+                Log.d("lapor", "onResponse: " +response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Laporan> call, Throwable t) {
+                Log.e("err", "onFailure: "+ t.getLocalizedMessage());
+            }
+        });
     }
 
     private void showRecyclerCardView() {

@@ -30,6 +30,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MissionV
 
     SharedPreferences sharedPreferences;
 
+
     public MissionAdapter(ArrayList<Misi> listMission, Context context) {
         this.listMission = listMission;
         this.context = context;
@@ -58,6 +59,7 @@ public class MissionAdapter extends RecyclerView.Adapter<MissionAdapter.MissionV
         holder.cvDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(context.getApplicationContext(), DetailMissionActivity.class);
                 intent.putExtra("detail", misi);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -18,6 +18,7 @@ public class APIClient {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl("http://192.168.0.14:8000/")
+                    .addConverterFactory(retrofit2.converter.scalars.ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

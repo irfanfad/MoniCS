@@ -27,6 +27,9 @@ public class DetailMissionActivity extends AppCompatActivity {
     Date dateNow;
     String date;
 
+
+    SharedPreferences sharedPreferences2;
+    SharedPreferences.Editor editor2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,9 @@ public class DetailMissionActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("DATE", 0);
         editor = sharedPreferences.edit();
 
+        sharedPreferences2 = getSharedPreferences("IDMISI", 0);
+        editor2 = sharedPreferences2.edit();
+
         dateNow = new Date();
         date = sharedPreferences.getString("DATENOW", "");
 
@@ -69,6 +75,8 @@ public class DetailMissionActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(DetailMissionActivity.this, MissionActivity.class);
                     if (date.isEmpty()) {
+                        editor2.putString("MISIID",misi.getIdMisi());
+                        editor2.commit();
                         editor.putString("DATENOW", getDateNow(dateNow));
                         editor.commit();
                         Log.d("dateNow", getDateNow(dateNow));
