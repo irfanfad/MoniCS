@@ -18,7 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LaporanActivity"></activity>
+        <activity android:name=".DetailLaporanActivity"></activity>
+
+        <service android:name=".BroadcastService" />
+
+        <activity android:name=".SplashScreenActivity" />
+        <activity android:name=".LaporanActivity" />
         <activity android:name=".RewardActivity" />
         <activity android:name=".LeaderboardActivity" />
         <activity android:name=".DetailMissionActivity" />

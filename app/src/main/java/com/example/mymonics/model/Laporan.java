@@ -1,9 +1,14 @@
 package com.example.mymonics.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Laporan {
+public class Laporan implements Parcelable
+{
+
     @SerializedName("id_lapor")
     @Expose
     private Integer idLapor;
@@ -34,6 +39,38 @@ public class Laporan {
     @SerializedName("point_misi")
     @Expose
     private Integer pointMisi;
+    public final static Parcelable.Creator<Laporan> CREATOR = new Creator<Laporan>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public Laporan createFromParcel(Parcel in) {
+            return new Laporan(in);
+        }
+
+        public Laporan[] newArray(int size) {
+            return (new Laporan[size]);
+        }
+
+    }
+            ;
+
+    protected Laporan(Parcel in) {
+        this.idLapor = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.waktuMulai = ((String) in.readValue((String.class.getClassLoader())));
+        this.waktuLapor = ((String) in.readValue((String.class.getClassLoader())));
+        this.gambarLapor = ((String) in.readValue((String.class.getClassLoader())));
+        this.nik = ((String) in.readValue((String.class.getClassLoader())));
+        this.idMisi = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.status = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.nama = ((String) in.readValue((String.class.getClassLoader())));
+        this.namaMisi = ((String) in.readValue((String.class.getClassLoader())));
+        this.pointMisi = ((Integer) in.readValue((Integer.class.getClassLoader())));
+    }
+
+    public Laporan() {
+    }
 
     public Integer getIdLapor() {
         return idLapor;
@@ -115,15 +152,21 @@ public class Laporan {
         this.pointMisi = pointMisi;
     }
 
-    @SerializedName("message")
-    @Expose
-    private String message;
-
-    public String getMessage() {
-        return message;
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(idLapor);
+        dest.writeValue(waktuMulai);
+        dest.writeValue(waktuLapor);
+        dest.writeValue(gambarLapor);
+        dest.writeValue(nik);
+        dest.writeValue(idMisi);
+        dest.writeValue(status);
+        dest.writeValue(nama);
+        dest.writeValue(namaMisi);
+        dest.writeValue(pointMisi);
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public int describeContents() {
+        return 0;
     }
+
 }

@@ -1,7 +1,9 @@
 package com.example.mymonics.fragment;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -58,7 +60,7 @@ public class NewFragment extends Fragment {
     String nik;
     SharedPreferences sharedPreferences;
     SharedPreferences sharedPreferences2;
-    SharedPreferences sharedPreferences3;
+    SharedPreferences sharedPreferences3,sharedPreferences4;
     SharedPreferences.Editor editor;
     String date, date2, idmisi;
     Button btnLapor;
@@ -92,6 +94,7 @@ public class NewFragment extends Fragment {
 
         sharedPreferences2 = getActivity().getSharedPreferences("DATE", 0);
         sharedPreferences3 = getActivity().getSharedPreferences("IDMISI", 0);
+        sharedPreferences4 = getActivity().getSharedPreferences("time", 0);
         editor = sharedPreferences2.edit();
         dateLapor = new Date();
         date = sharedPreferences2.getString("DATENOW", "");
@@ -145,6 +148,28 @@ public class NewFragment extends Fragment {
         kirimLaporan();
     }
 
+    void alert(){
+//        String time = sharedPreferences4.getString("time","");
+//        long date  = Long.parseLong(time);
+//        String hoursLeft = String.format("%d", (date % 86400) / 3600);
+//        String minutesLeft = String.format("%d", ((date % 86400) % 3600) / 60);
+//        String secondsLeft = String.format("%d", ((date % 86400) % 3600) % 60);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Selamat!");
+        builder.setMessage("Anda telah menyelesaikan misi ini dengan baik, dan mendapatkan 100 point");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
     private void kirimLaporan(){
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
@@ -163,6 +188,8 @@ public class NewFragment extends Fragment {
             @Override
             public void onResponse(Call<Laporan> call, Response<Laporan> response) {
                 Log.d("lapor", "onResponse: " +response.body());
+                sharedPreferences2.edit().remove("DATENOW").apply();
+                alert();
             }
 
             @Override
@@ -209,7 +236,8 @@ public class NewFragment extends Fragment {
         editor.putString("DATELAPOR", getDateNow(dateLapor));
         editor.commit();
         Log.d("datelapor", getDateNow(dateLapor));
-        sharedPreferences2.edit().remove("DATENOW").apply();
+
+
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {

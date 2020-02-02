@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".DetailMissionActivity">
+    tools:context=".DetailLaporanActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,7 +14,7 @@
         android:minHeight="?attr/actionBarSize">
 
         <ImageButton
-            android:id="@+id/img_back_det"
+            android:id="@+id/img_back_det_lap"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@null"
@@ -25,7 +24,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Detail Mission"
+            android:text="Detail Laporan"
             android:textColor="@color/whiteTextColor"
             android:textSize="22sp" />
     </androidx.appcompat.widget.Toolbar>
@@ -50,7 +49,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="Your Mission"
+                android:text="Mission"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -62,10 +61,35 @@
                 android:visibility="visible" />
 
             <LinearLayout
-                android:id="@+id/detail_misi"
+                android:id="@+id/detail_cs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_mission"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    android:id="@+id/img_cs"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:paddingRight="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_cleaningservice" />
+
+                <TextView
+                    android:id="@+id/tv_nama_cs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Rudi Setiawan"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detail_misi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/detail_cs"
                 android:layout_margin="10dp">
 
                 <ImageView
@@ -119,7 +143,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tv_jam_selesai"
+                    android:id="@+id/tv_jam_lapor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -141,7 +165,7 @@
                     android:src="@drawable/ic_chest" />
 
                 <TextView
-                    android:id="@+id/tv_point"
+                    android:id="@+id/tv_point_lapor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -165,7 +189,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cv_detail"
-        android:layout_marginVertical="10dp">
+        android:layout_marginVertical="0dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -177,9 +201,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="Your Challenge"
+                android:text="Image"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -196,73 +219,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_challenge"
+                android:gravity="center"
                 android:paddingVertical="10dp">
 
                 <ImageView
-                    android:id="@+id/img_challenge"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:paddingLeft="5dp"
+                    android:id="@+id/img_laporan"
+                    android:layout_width="200dp"
+                    android:layout_height="250dp"
                     android:src="@drawable/ic_challenge" />
-
-                <TextView
-                    android:id="@+id/tv_challenge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingLeft="15dp"
-                    android:text="Selesaikan Misi Kurang Dari 40 Menit"
-                    android:textSize="16sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layout_challenge">
-            <ImageView
-                android:id="@+id/img_chest_challenge"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_chest" />
-
-            <TextView
-                android:id="@+id/tv_bonus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="15sp"
-                android:text="Bonus 50 Point"
-                android:textSize="16sp" />
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/tv_countdowntext"
-        android:layout_below="@id/cv_challenge"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Waktu Anda Tersisa"
-        />
-    <TextView
-        android:id="@+id/tv_countdown"
-        android:layout_below="@id/tv_countdowntext"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="40sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="00:00:00"
-        />
-    <Button
-        android:layout_marginTop="20dp"
-        android:id="@+id/btn_mulai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_countdown"
-        android:layout_marginHorizontal="50dp"
-        android:background="@drawable/button_background_blue"
-        android:text="Mulai"
-        android:textColor="@color/whiteTextColor" />
+
 </RelativeLayout>

@@ -1,7 +1,10 @@
 package com.example.mymonics;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +27,7 @@ public class LaporanActivity extends AppCompatActivity {
     private RecyclerView rvLaporan;
     private List<Laporan> list;
     LaporanAdapter laporanAdapter;
+    private ImageButton imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +37,17 @@ public class LaporanActivity extends AppCompatActivity {
         list = new ArrayList<>();
         rvLaporan = (RecyclerView) findViewById(R.id.rv_laporan);
         rvLaporan.setHasFixedSize(true);
+        imgBack = findViewById(R.id.img_back);
 
         showRecyclerCardView();
         getLaporan();
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LaporanActivity.this, ManagerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getLaporan() {

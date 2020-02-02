@@ -1,6 +1,7 @@
 package com.example.mymonics.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mymonics.DetailLaporanActivity;
 import com.example.mymonics.R;
 import com.example.mymonics.model.Laporan;
 
@@ -52,6 +54,16 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.LaporanV
             holder.imgStatus.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.icons8_cancel_240));
         }
 
+        holder.cvLaporan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context.getApplicationContext(), DetailLaporanActivity.class);
+                intent.putExtra("detailLapor", laporan);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -73,7 +85,7 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.LaporanV
             tvNamaMisi = itemView.findViewById(R.id.tv_nama_misi);
             tvPoint = itemView.findViewById(R.id.tv_point2);
             imgStatus = itemView.findViewById(R.id.img_status);
-            cvLaporan = itemView.findViewById(R.id.cv_laporan);
+            cvLaporan = itemView.findViewById(R.id.cv_laporan_item);
 
 
 
