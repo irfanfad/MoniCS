@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                         } else {
                             sessionManager.createSession(user.getJabatan(),user.getNik(),user.getNama(),user.getPoint());
-                            Intent intent = new Intent(LoginActivity.this, CleaningServiceActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, SplashScreenActivity.class);
                             startActivity(intent);
                         }
                     }

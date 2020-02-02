@@ -22,7 +22,7 @@
 
         <service android:name=".BroadcastService" />
 
-        <activity android:name=".SplashScreenActivity" />
+
         <activity android:name=".LaporanActivity" />
         <activity android:name=".RewardActivity" />
         <activity android:name=".LeaderboardActivity" />
@@ -36,6 +36,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
     </application>
 
