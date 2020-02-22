@@ -18,6 +18,7 @@ public class SessionManager {
     public static final String NIK = "NIK";
     public static final String NAMA = "NAMA";
     public static final String POINT = "POINT";
+    public static final String ID_LOKASI = "ID_LOKASI";
 
     public SessionManager(Context context){
         this.context = context;
@@ -25,12 +26,13 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
-    public void createSession(String jabatan, String nik, String nama, String point){
+    public void createSession(String jabatan, String nik, String nama, String point, String id_lokasi){
         editor.putBoolean(LOGIN, true);
         editor.putString(JABATAN, jabatan);
         editor.putString(NIK, nik);
         editor.putString(NAMA, nama);
         editor.putString(POINT, point);
+        editor.putString(ID_LOKASI, id_lokasi);
         editor.commit();
     }
 

@@ -82,15 +82,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 public void onResponse(Call<User> call, Response<User> response) {
 
                     User user = response.body();
+                    Log.d("idLok", String.valueOf(user.getIdLokasi()));
                     if (user.getMessage() != null) {
                         Toast.makeText(LoginActivity.this, user.getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         if (user.getJabatan().equalsIgnoreCase("Manager")) {
-                            sessionManager.createSession(user.getJabatan(), user.getNik(), user.getNama(),user.getPoint());
+                            sessionManager.createSession(user.getJabatan(), user.getNik(), user.getNama(), String.valueOf(user.getPoint()),String.valueOf(user.getIdLokasi()));
                             Intent intent = new Intent(LoginActivity.this, ManagerActivity.class);
                             startActivity(intent);
                         } else {
-                            sessionManager.createSession(user.getJabatan(),user.getNik(),user.getNama(),user.getPoint());
+                            sessionManager.createSession(user.getJabatan(),user.getNik(),user.getNama(), String.valueOf(user.getPoint()),String.valueOf(user.getIdLokasi()));
                             Intent intent = new Intent(LoginActivity.this, SplashScreenActivity.class);
                             startActivity(intent);
                         }

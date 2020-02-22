@@ -3,7 +3,10 @@ package com.example.mymonics.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable
+{
 
     @SerializedName("nik")
     @Expose
@@ -26,29 +29,32 @@ public class User {
     @SerializedName("jabatan")
     @Expose
     private String jabatan;
-
+    @SerializedName("id_lokasi")
+    @Expose
+    private Integer idLokasi;
+    @SerializedName("point")
+    @Expose
+    private Integer point;
+    @SerializedName("total_point")
+    @Expose
+    private Integer totalPoint;
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("point")
+
+    public String getNamaLokasi() {
+        return namaLokasi;
+    }
+
+    public void setNamaLokasi(String namaLokasi) {
+        this.namaLokasi = namaLokasi;
+    }
+
+    @SerializedName("nama_lokasi")
     @Expose
-    private String point;
+    private String namaLokasi;
 
-    public String getPoint() {
-        return point;
-    }
-
-    public void setPoint(String point) {
-        this.point = point;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    private final static long serialVersionUID = 6886995125676067800L;
 
     public String getNik() {
         return nik;
@@ -106,4 +112,35 @@ public class User {
         this.jabatan = jabatan;
     }
 
+    public Integer getIdLokasi() {
+        return idLokasi;
+    }
+
+    public void setIdLokasi(Integer idLokasi) {
+        this.idLokasi = idLokasi;
+    }
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
+
+    public Integer getTotalPoint() {
+        return totalPoint;
+    }
+
+    public void setTotalPoint(Integer totalPoint) {
+        this.totalPoint = totalPoint;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

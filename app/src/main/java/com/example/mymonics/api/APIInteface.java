@@ -1,7 +1,9 @@
 package com.example.mymonics.api;
 
+import com.example.mymonics.model.EasterEgg;
 import com.example.mymonics.model.Laporan;
 import com.example.mymonics.model.Misi;
+import com.example.mymonics.model.Reward;
 import com.example.mymonics.model.User;
 
 import java.util.List;
@@ -24,15 +26,71 @@ public interface APIInteface {
                         @Field("jabatan") String jabatan
                         );
 
+    @FormUrlEncoded
+    @POST("point")
+    Call<User> point(@Field("nik") String nik);
+
+    @FormUrlEncoded
+    @POST("ambilReward")
+    Call<User> ambilReward(@Field("nik") String nik,
+                           @Field("point_reward") String point_reward,
+                           @Field("id_reward") String id_reward);
+
+    @FormUrlEncoded
+    @POST("easterEgg")
+    Call<User> easterEgg(@Field("nik") String nik,
+                           @Field("bonus") String bonus);
+
+    @POST("/api/lapor")
+    Call<Laporan> lapor(@Body RequestBody file);
+
+    @FormUrlEncoded
+    @POST("addUser")
+    Call<User> addUser(@Field("nik") String nik,
+                         @Field("username") String username,
+                         @Field("password") String password,
+                         @Field("nama") String nama,
+                         @Field("alamat") String alamat,
+                         @Field("no_telp") String no_telp,
+                         @Field("id_lokasi") String id_lokasi);
+
+    @FormUrlEncoded
+    @POST("addMisi")
+    Call<Misi> addMisi(@Field("nama_misi") String nama_misi,
+                       @Field("jam_mulai") String jam_mulai,
+                       @Field("jam_selesai") String jam_selesai,
+                       @Field("id_lokasi") String id_lokasi,
+                       @Field("point_misi") String point_misi);
+
+    @POST("addReward")
+    Call<Reward> addReward(@Body RequestBody file);
+
+
+
+
+
     @GET("getMisi")
-    Call<List<Misi>> getMisi(@Query("nik") String nik);
+    Call<List<Misi>> getMisi(@Query("id_lokasi") String id_lokasi);
 
     @GET("getLaporan")
     Call<List<Laporan>> getLaporan();
 
+    @GET("getData")
+    Call<List<User>> getData();
 
-    @POST("/api/lapor")
-    Call<Laporan> lapor(@Body RequestBody file);
+    @GET("getUser")
+    Call<List<User>> getUser();
+
+    @GET("getListMisi")
+    Call<List<Misi>> getListMisi();
+
+    @GET("getReward")
+    Call<List<Reward>> getReward();
+
+    @GET("getEasterEgg")
+    Call<EasterEgg> getEasterEgg();
+
+
 
 //    @Multipart
 //    @POST("/api/Accounts/editaccount")

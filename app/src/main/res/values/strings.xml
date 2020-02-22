@@ -7,6 +7,29 @@
         <item>Cleaning Service</item>
     </string-array>
 
+    <string-array name="lokasi">
+        <item>Pilih Lokasi</item>
+        <item>Halaman dan Basemant</item>
+        <item>Lobby utama gedung baru</item>
+        <item>Lantai 5</item>
+        <item>Lantai 8</item>
+        <item>Lantai 11</item>
+        <item>Lantai 15 dan 17</item>
+        <item>Ekonomi, MI 2 dan IF 3, Robotika</item>
+        <item>Front office lobby utama gedung lama</item>
+        <item>Pasca sarjana lantai 2 dan 3 kampus 4</item>
+        <item>Labkom  lantai 2 dan 3</item>
+        <item>Lantai 7 dan lantai 6 kampus 4</item>
+        <item>Kampus dago</item>
+        <item>Yayasan DU 99</item>
+        <item>Radio Hits Unikom</item>
+        <item>Halaman dan Basemant (Siang)</item>
+        <item>Lantai 5 (Siang)</item>
+        <item>Ekonomi, MI 2 dan IF 3, Robotika (Siang)</item>
+        <item>Pasca sarjana lantai 2 dan 3 kampus 4 (Siang)</item>
+        <item>Kampus dago (Siang)</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -126,24 +126,6 @@ public class DetailMissionActivity extends AppCompatActivity {
         long date = jamSelesai.getTime()- jamMulai.getTime();
 
         BroadcastService.time = date;
-//        CountDownTimer cdt = new CountDownTimer(date, 1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                tvCountDown.setVisibility(View.VISIBLE);
-//                Long serverUptimeSeconds =
-//                        (millisUntilFinished) / 1000;
-//                hoursLeft = String.format("%d", (serverUptimeSeconds % 86400) / 3600);
-//                String minutesLeft = String.format("%d", ((serverUptimeSeconds % 86400) % 3600) / 60);
-//                String secondsLeft = String.format("%d", ((serverUptimeSeconds % 86400) % 3600) % 60);
-//                tvCountDown.setText(hoursLeft+":"+minutesLeft+":"+secondsLeft);
-//                Log.d("tes", hoursLeft+" "+minutesLeft+" "+secondsLeft);
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//
-//            }
-//        }.start();
         startService(new Intent(this, BroadcastService.class));
 
     }

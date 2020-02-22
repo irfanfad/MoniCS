@@ -18,6 +18,8 @@ public class DetailLaporanActivity extends AppCompatActivity {
     private ImageView imgLaporan;
     private ImageButton imgBack;
 
+    public static final String url = "https://monics.victim.id/storage/gambar/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,7 @@ public class DetailLaporanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailLaporanActivity.this, LaporanActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -45,9 +48,9 @@ public class DetailLaporanActivity extends AppCompatActivity {
         tvNamaMisi.setText(laporan.getNamaMisi());
         tvJamMulai.setText(laporan.getWaktuMulai());
         tvJamLapor.setText(laporan.getWaktuMulai());
-        //tvPoint.setText(laporan.getPointMisi());
+        tvPoint.setText(String.valueOf(laporan.getPointMisi()));
 
-        Glide.with(this).load("http://monics.victim.id/storage/gambar/"+laporan.getGambarLapor()).into(imgLaporan);
+        Glide.with(this).load(url+laporan.getGambarLapor()).into(imgLaporan);
 
 
     }

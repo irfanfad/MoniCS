@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -242,6 +242,19 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </GridLayout>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom"
+    android:layout_margin="16dp">
+        <ImageView
+            android:id="@+id/img_easteregg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/easteregg"
+             />
+</FrameLayout>
     </LinearLayout>
 
 </ScrollView>

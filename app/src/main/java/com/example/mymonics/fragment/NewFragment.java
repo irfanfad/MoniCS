@@ -44,6 +44,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.mymonics.SessionManager.ID_LOKASI;
 import static com.example.mymonics.SessionManager.NIK;
 import static com.example.mymonics.SessionManager.PREF_NAME;
 import static com.example.mymonics.SessionManager.PRIVATE_MODE;
@@ -57,7 +58,7 @@ public class NewFragment extends Fragment {
     private ArrayList<Misi> list;
     MissionAdapter missionAdapter;
     View view;
-    String nik;
+    String nik,idLokasi;
     SharedPreferences sharedPreferences;
     SharedPreferences sharedPreferences2;
     SharedPreferences sharedPreferences3,sharedPreferences4;
@@ -91,6 +92,7 @@ public class NewFragment extends Fragment {
 
         sharedPreferences = getActivity().getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         nik = sharedPreferences.getString(NIK, "");
+        idLokasi = sharedPreferences.getString(ID_LOKASI, "");
 
         sharedPreferences2 = getActivity().getSharedPreferences("DATE", 0);
         sharedPreferences3 = getActivity().getSharedPreferences("IDMISI", 0);
@@ -149,15 +151,10 @@ public class NewFragment extends Fragment {
     }
 
     void alert(){
-//        String time = sharedPreferences4.getString("time","");
-//        long date  = Long.parseLong(time);
-//        String hoursLeft = String.format("%d", (date % 86400) / 3600);
-//        String minutesLeft = String.format("%d", ((date % 86400) % 3600) / 60);
-//        String secondsLeft = String.format("%d", ((date % 86400) % 3600) % 60);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Selamat!");
-        builder.setMessage("Anda telah menyelesaikan misi ini dengan baik, dan mendapatkan 100 point");
+        builder.setMessage("Anda telah menyelesaikan misi ini dengan baik, dan mendapatkan 100 point + bonus 50 point karna berhasil menyelesaikan kurang dari 40 menit");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -208,7 +205,7 @@ public class NewFragment extends Fragment {
     public void getMission() {
         APIInteface apiInteface = APIClient.getApiClient().create(APIInteface.class);
 
-        Call<List<Misi>> call = apiInteface.getMisi(nik);
+        Call<List<Misi>> call = apiInteface.getMisi(idLokasi);
         call.enqueue(new Callback<List<Misi>>() {
             @Override
             public void onResponse(Call<List<Misi>> call, Response<List<Misi>> response) {
@@ -243,7 +240,7 @@ public class NewFragment extends Fragment {
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, timeStamp, null);
         return Uri.parse(path);
     }

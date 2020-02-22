@@ -34,168 +34,24 @@
         android:id="@+id/txt_high"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
         android:layout_below="@id/toolbar"
+        android:paddingTop="10dp"
         android:text="Highscores"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <LinearLayout
-        android:id="@+id/lead_1"
+    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/rv_leaderboard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_high"
-        android:layout_margin="10dp">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:paddingTop="5dp"
+        tools:context=".LeaderboardActivity"
+        tools:listitem="@layout/cv_leaderboard">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_cleaningservice"
-            app:civ_border_color="#FFF"
-            app:civ_border_width="2dp" />
-
-        <TextView
-            android:paddingLeft="20dp"
-            android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Muhammad Irfan Fadilah"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="34000"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lead_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_high"
-        android:layout_margin="10dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_cleaningservice"
-            app:civ_border_color="#FFF"
-            app:civ_border_width="2dp" />
-
-        <TextView
-            android:paddingLeft="20dp"
-            android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Sutisna"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="29000"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_high"
-        android:layout_margin="10dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_cleaningservice"
-            app:civ_border_color="#FFF"
-            app:civ_border_width="2dp" />
-
-        <TextView
-            android:paddingLeft="20dp"
-            android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Jhon Doe"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="25000"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_high"
-        android:layout_margin="10dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_cleaningservice"
-            app:civ_border_color="#FFF"
-            app:civ_border_width="2dp" />
-
-        <TextView
-            android:paddingLeft="20dp"
-            android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Supra"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="23500"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_high"
-        android:layout_margin="10dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_cleaningservice"
-            app:civ_border_color="#FFF"
-            app:civ_border_width="2dp" />
-
-        <TextView
-            android:paddingLeft="20dp"
-            android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Honda"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="20000"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

@@ -18,10 +18,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailLaporanActivity"></activity>
+        <activity android:name=".AddRewardActivity"></activity>
+        <activity android:name=".AddMisiActivity" />
+        <activity android:name=".AddCleaningServiceActivity" />
+        <activity android:name=".KelolaRewardActivity" />
+        <activity android:name=".KelolaMisiActivity" />
+        <activity android:name=".KelolaCleaningServiceActivity" />
+        <activity android:name=".EasterEggActivity" />
+        <activity android:name=".DetailRewardActivity" />
+        <activity android:name=".DetailLaporanActivity" />
 
         <service android:name=".BroadcastService" />
-
 
         <activity android:name=".LaporanActivity" />
         <activity android:name=".RewardActivity" />
@@ -37,9 +44,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>

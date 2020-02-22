@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mymonics.adapter.RewardAdapter;
+import com.example.mymonics.adapter.KelolaRewardAdapter;
 import com.example.mymonics.api.APIClient;
 import com.example.mymonics.api.APIInteface;
 import com.example.mymonics.model.Reward;
@@ -22,36 +22,33 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RewardActivity extends AppCompatActivity {
-
-    private RecyclerView rvReward;
-    private List<Reward> listReward;
-    RewardAdapter rewardAdapter;
+public class KelolaRewardActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private List<Reward> list;
+    KelolaRewardAdapter kelolaRewardAdapter;
     private ImageButton imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reward);
+        setContentView(R.layout.activity_kelola_reward);
 
-        listReward = new ArrayList<>();
-        rvReward = findViewById(R.id.rv_reward);
-        rvReward.setHasFixedSize(true);
+        list = new ArrayList<>();
+        recyclerView = (RecyclerView) findViewById(R.id.rv_kelola_reward);
+        recyclerView.setHasFixedSize(true);
         imgBack = findViewById(R.id.img_back);
 
         showRecyclerCardView();
-        getReward();
-
+        getData();
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RewardActivity.this, CleaningServiceActivity.class);
+                Intent intent = new Intent(KelolaRewardActivity.this, ManagerActivity.class);
                 startActivity(intent);
             }
         });
     }
-
-    private void getReward() {
+    private void getData() {
         APIInteface apiInteface = APIClient.getApiClient().create(APIInteface.class);
 
         Call<List<Reward>> call = apiInteface.getReward();
@@ -59,8 +56,8 @@ public class RewardActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Reward>> call, Response<List<Reward>> response) {
                 Log.d("masuk", String.valueOf(response.body()));
-                listReward.addAll(response.body());
-                rvReward.setAdapter(rewardAdapter);
+                list.addAll(response.body());
+                recyclerView.setAdapter(kelolaRewardAdapter);
             }
 
             @Override
@@ -71,8 +68,12 @@ public class RewardActivity extends AppCompatActivity {
     }
 
     private void showRecyclerCardView() {
-        rvReward.setLayoutManager(new GridLayoutManager(this,2));
-        rewardAdapter = new RewardAdapter(listReward,this);
-        rvReward.setAdapter(rewardAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        kelolaRewardAdapter = new KelolaRewardAdapter(list,this);
+        recyclerView.setAdapter(kelolaRewardAdapter);
+    }
+    public void tambah(View view) {
+        Intent intent = new Intent(KelolaRewardActivity.this, AddRewardActivity.class);
+        startActivity(intent);
     }
 }

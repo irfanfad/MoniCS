@@ -31,11 +31,14 @@ public class ManagerActivity extends AppCompatActivity implements View.OnClickLi
         tvNama = findViewById(R.id.tv_nama);
         cvLaporan = findViewById(R.id.cv_laporan);
         cvCleaningService = findViewById(R.id.cv_cleaningservice);
-        cvMisi = findViewById(R.id.cv_misi);
+        cvMisi = findViewById(R.id.cv_mission);
         cvReward = findViewById(R.id.cv_reward);
         cvLogout = findViewById(R.id.cv_logout);
 
         cvLaporan.setOnClickListener(this);
+        cvCleaningService.setOnClickListener(this);
+        cvMisi.setOnClickListener(this);
+        cvReward.setOnClickListener(this);
         cvLogout.setOnClickListener(this);
 
 
@@ -52,6 +55,18 @@ public class ManagerActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v==cvLaporan){
             Intent intent = new Intent(ManagerActivity.this, LaporanActivity.class);
+            startActivity(intent);
+        }
+        if(v==cvCleaningService){
+            Intent intent = new Intent(ManagerActivity.this, KelolaCleaningServiceActivity.class);
+            startActivity(intent);
+        }
+        if(v==cvMisi){
+            Intent intent = new Intent(ManagerActivity.this, KelolaMisiActivity.class);
+            startActivity(intent);
+        }
+        if(v==cvReward){
+            Intent intent = new Intent(ManagerActivity.this, KelolaRewardActivity.class);
             startActivity(intent);
         }
         if (v==cvLogout){
